@@ -4,7 +4,7 @@ defmodule Hangman.GameTest do
   alias Hangman.Game
 
   setup do
-    game = Game.new_game()
+    game = Game.new_game("test")
     {:ok, game: game}
   end
 
@@ -27,14 +27,30 @@ defmodule Hangman.GameTest do
 
   test "first occurence of letter is not already used", context do
     game = context[:game]
-    { game, _tally } = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
     assert game.game_state != :already_used
   end
 
   test "second occurence of letter is already used", context do
     game = context[:game]
-    { game, _tally } = Game.make_move(game, "x")
-    { game, _tally } = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
     assert game.game_state == :already_used
+  end
+
+  test "a good guess is recognized", context do
+    game = context[:game]
+    {game, _} = Game.make_move(game, "t")
+    assert game.game_state == :good_guess
+    assert game.turns_left == 7
+  end
+
+  test "a guessed word is a won game", context do
+    game = context[:game]
+    {game, _} = Game.make_move(game, "t")
+    {game, _} = Game.make_move(game, "e")
+    {game, _} = Game.make_move(game, "s")
+    assert game.game_state == :won
+    assert game.turns_left == 7
   end
 end
