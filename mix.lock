@@ -1,0 +1,4 @@
+%{
+  "dictionary": {:git, "https://github.com/nielsonrolim/elixir-dictionary.git", "61360d36577ecee39f86c5cb803744efd84e07ad", []},
+  "inflex": {:hex, :inflex, "2.0.0", "db69d542b8fdb23ac667f9bc0c2395a3983fa2da6ae2efa7ab5dc541928f7a75", [:mix], [], "hexpm"},
+}
