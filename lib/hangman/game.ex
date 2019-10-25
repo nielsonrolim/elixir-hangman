@@ -44,7 +44,7 @@ defmodule Hangman.Game do
   ### private ###
 
   defp invalid_guess?(guess) do
-    String.length(guess) > 1
+    String.length(guess) != 1
   end
 
   defp reveal_guessed(letters, used) do
