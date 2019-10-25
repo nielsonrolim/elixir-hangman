@@ -22,8 +22,13 @@ defmodule Hangman.Game do
   end
 
   def make_move(game, guess) do
-    accept_move(game, guess, MapSet.member?(game.used, guess))
-    |> return_with_tally()
+    if String.length(guess) > 1 do
+      Map.put(game, :game_state, :invalid_move)
+      |> return_with_tally()
+    else
+      accept_move(game, guess, MapSet.member?(game.used, guess))
+      |> return_with_tally()
+    end
   end
 
   def tally(game) do
